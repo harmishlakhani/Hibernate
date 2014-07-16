@@ -1,6 +1,7 @@
 /**
  * This Entity represent the Country table in DB.
- * Fields are mapped to columns.
+ * Table name and fields name are same as Class and field names.
+ * This is default behavior if we doesn't provide any additional annoations.  
  */
 package com.github.dto;
 

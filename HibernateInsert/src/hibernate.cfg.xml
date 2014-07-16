@@ -28,6 +28,8 @@
 		
 		<!-- Entities  -->
 		<mapping class="com.github.dto.Country"/>
+		<mapping class="com.github.dto.State"/>
+		<mapping class="com.github.dto.Login"/>
 		
     </session-factory>
 
