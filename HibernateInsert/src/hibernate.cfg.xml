@@ -30,6 +30,7 @@
 		<mapping class="com.github.dto.Country"/>
 		<mapping class="com.github.dto.State"/>
 		<mapping class="com.github.dto.Login"/>
+		<mapping class="com.github.dto.LoginForPrimaryKey"/>
 		<mapping class="com.github.dto.Address"/>
 		
     </session-factory>
