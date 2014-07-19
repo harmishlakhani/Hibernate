@@ -43,12 +43,17 @@ public class CustomerDataService {
 		addr.setStreetLine("111");
 		addr.setPincode("360410");
 		
-		customer.setAddress(addr);
+		Address ofcAddr = new Address();
+		ofcAddr.setCity("Bangalore");
+		ofcAddr.setCountry("India");
+		ofcAddr.setStreetLine("104");
+		ofcAddr.setPincode("560037");
 		
+		customer.setAddress(addr);
+		customer.setOfficeAddress(ofcAddr);
 		
 		CustomerDataService service = new CustomerDataService();
 		service.addCustomerData(customer);
-		
 	}
 
 }
