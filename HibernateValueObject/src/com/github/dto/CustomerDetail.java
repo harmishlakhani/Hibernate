@@ -1,10 +1,21 @@
 /**
- * This Entity represent the CUSTOMECUSTOMER_DETAILR table in DB.
+ * This Entity represent the CUSTOMER_DETAIL table in DB.
  * It includes Address as a Value Object in CUSTOMER_DETAIL table.
  * @Embedded is optional here. @Embeddable is enough. 
+ * 
+ * If you want more than one address then also you can do that but you need to give unique
+ * column name for each attribute of Value Object.
+ * Ex : address represents home address
+ * 		officeAddress represents office address
+ * 
+ * Annotation : @AttributeOverrides contains each overridden attribute detail as a list
+ * 				@AttributeOverride contains single attribute detail
  */
 package com.github.dto;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -19,6 +30,15 @@ public class CustomerDetail {
 	
 	@Embedded
 	private Address address;
+	
+	@Embedded
+	@AttributeOverrides({
+	@AttributeOverride(name = "streetLine", column = @Column(name = "OFC_STREET_LINE")),
+	@AttributeOverride(name = "city", column = @Column(name = "OFC_CITY")),
+	@AttributeOverride(name = "country", column = @Column(name = "OFC_COUNTRY")),
+	@AttributeOverride(name = "pincode", column = @Column(name = "OFC_PINCODE"))
+	})
+	private Address officeAddress;
 	
 	public int getCustomerId() {
 		return customerId;
@@ -50,6 +70,14 @@ public class CustomerDetail {
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+
+	public Address getOfficeAddress() {
+		return officeAddress;
+	}
+
+	public void setOfficeAddress(Address officeAddress) {
+		this.officeAddress = officeAddress;
 	}
 	
 }
