@@ -6,6 +6,11 @@
  * Here Hibernate will store addresses in separate table and use foreign key
  * to link it with customer detail unlike Value Object which store data in 
  * same table.
+ * 
+ * By default hibernate provides table name as entityName_collectionField
+ * and foreignKey name as entityName_primaryKeyField.
+ * If you want to change this you can use @JoinTable annotation as shown in
+ * below example.
  */
 package com.github.dto;
 
@@ -15,6 +20,8 @@ import java.util.Set;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 
 @Entity(name = "CUSTOMER_DETAIL")
 public class CustomerDetail {
@@ -25,6 +32,7 @@ public class CustomerDetail {
 	private String lastName;
 	
 	@ElementCollection
+	@JoinTable(name = "CUSTOMER_ADDRESS", joinColumns = @JoinColumn(name = "CUSTOMER_ID"))
 	private Set<Address> addressList = new HashSet<Address>();
 	
 	public int getCustomerId() {
