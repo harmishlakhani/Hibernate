@@ -11,17 +11,34 @@
  * and foreignKey name as entityName_primaryKeyField.
  * If you want to change this you can use @JoinTable annotation as shown in
  * below example.
+ * 
+ * We have taken 2 collection 
+ *  1. Set : if we don't need primary key
+ *  2. List : if we need index/primary key
+ *  
+ *  For List we need to give some specification
+ *  about name of primary key and type.
+ *  We don't need a separate property in Address class
+ *  to represent primary key. It is someting that hibernate
+ *  will insert using annotation.
  */
 package com.github.dto;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+
+import org.hibernate.annotations.CollectionId;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 @Entity(name = "CUSTOMER_DETAIL")
 public class CustomerDetail {
@@ -32,8 +49,14 @@ public class CustomerDetail {
 	private String lastName;
 	
 	@ElementCollection
-	@JoinTable(name = "CUSTOMER_ADDRESS", joinColumns = @JoinColumn(name = "CUSTOMER_ID"))
-	private Set<Address> addressList = new HashSet<Address>();
+	@JoinTable(name = "CUSTOMER_ADDRESS_WITHOUT_PK", joinColumns = @JoinColumn(name = "CUSTOMER_ID"))
+	private Set<Address> addressSet = new HashSet<Address>();
+	
+	@ElementCollection
+	@JoinTable(name = "CUSTOMER_ADDRESS_WITH_PK", joinColumns = @JoinColumn(name = "CUSTOMER_ID"))
+	@GenericGenerator(name = "hilo-gen", strategy = "hilo")
+	@CollectionId(columns = { @Column(name = "ADDRESS_ID") }, generator = "hilo-gen", type = @Type(type = "long"))
+	private Collection<Address> addressList = new ArrayList<Address>();
 	
 	public int getCustomerId() {
 		return customerId;
@@ -59,11 +82,19 @@ public class CustomerDetail {
 		this.lastName = lastName;
 	}
 
-	public Set<Address> getAddressList() {
+	public Set<Address> getAddressSet() {
+		return addressSet;
+	}
+
+	public void setAddressSet(Set<Address> addressSet) {
+		this.addressSet = addressSet;
+	}
+
+	public Collection<Address> getAddressList() {
 		return addressList;
 	}
 
-	public void setAddressList(Set<Address> addressList) {
+	public void setAddressList(Collection<Address> addressList) {
 		this.addressList = addressList;
 	}
 

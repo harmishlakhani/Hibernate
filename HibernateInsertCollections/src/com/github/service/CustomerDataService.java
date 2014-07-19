@@ -53,6 +53,10 @@ public class CustomerDataService {
 		customer.getAddressList().add(homeAddr);
 		customer.getAddressList().add(ofcAddr);
 		
+		//It can have many addresses
+		customer.getAddressSet().add(homeAddr);
+		customer.getAddressSet().add(ofcAddr);
+		
 		CustomerDataService service = new CustomerDataService();
 		service.addCustomerData(customer);
 	}
