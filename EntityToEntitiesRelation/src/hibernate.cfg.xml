@@ -29,6 +29,8 @@
 		<!-- Entities  -->
 		<mapping class="com.github.dto.User"/>
 		<mapping class="com.github.dto.Vehicle"/>
+		<mapping class="com.github.dto.Client"/>
+		<mapping class="com.github.dto.Address"/>
 		
     </session-factory>
 
