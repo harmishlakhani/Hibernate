@@ -27,9 +27,13 @@
         <property name="hbm2ddl.auto">create</property>
 		
 		<!-- Entities  -->
-		<mapping class="com.github.dto.Vehicle"/>
-		<mapping class="com.github.dto.TwoWheelerVehicle"/>
-		<mapping class="com.github.dto.FourWheelerVehicle"/>
+		<mapping class="com.github.singletable.dto.Vehicle"/>
+		<mapping class="com.github.singletable.dto.TwoWheelerVehicle"/>
+		<mapping class="com.github.singletable.dto.FourWheelerVehicle"/>
+		
+		<mapping class="com.github.tableperclass.dto.Vehicle"/>
+		<mapping class="com.github.tableperclass.dto.TwoWheelerVehicle"/>
+		<mapping class="com.github.tableperclass.dto.FourWheelerVehicle"/>
 		
     </session-factory>
 
