@@ -2,7 +2,7 @@
  * This class represents FourWheelerVehicle Entity.
  * It inherits from Vehicle Entity.
  */
-package com.github.dto;
+package com.github.singletable.dto;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;

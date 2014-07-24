@@ -12,7 +12,7 @@
  * In this case it is difficult to identify whether object
  * is of base class or child class.
  */
-package com.github.dto;
+package com.github.singletable.dto;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;

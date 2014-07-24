@@ -4,16 +4,16 @@
  * add vehicle : this method insert data represented by Vehicle.java
  * add relationship : insert bidirectional relationship between user and vehicle
  */
-package com.github.service;
+package com.github.singletable.service;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
-import com.github.dto.FourWheelerVehicle;
-import com.github.dto.TwoWheelerVehicle;
-import com.github.dto.Vehicle;
+import com.github.singletable.dto.FourWheelerVehicle;
+import com.github.singletable.dto.TwoWheelerVehicle;
+import com.github.singletable.dto.Vehicle;
 
 public class VehicleService {
 
