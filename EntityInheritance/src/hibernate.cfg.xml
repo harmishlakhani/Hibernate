@@ -35,6 +35,9 @@
 		<mapping class="com.github.tableperclass.dto.TwoWheelerVehicle"/>
 		<mapping class="com.github.tableperclass.dto.FourWheelerVehicle"/>
 		
+		<mapping class="com.github.joined.dto.Vehicle"/>
+		<mapping class="com.github.joined.dto.TwoWheelerVehicle"/>
+		<mapping class="com.github.joined.dto.FourWheelerVehicle"/>
     </session-factory>
 
 </hibernate-configuration>
