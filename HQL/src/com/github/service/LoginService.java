@@ -12,6 +12,8 @@
  * columns. we are interested in selected columns only so give name of the 
  * columns that you need in select statement of HQL.
  * 
+ * read login with parameter substitution : it is used to avoid SQL Injection. 
+ * 
  */
 package com.github.service;
 
@@ -93,6 +95,40 @@ public class LoginService {
 		session.getTransaction().commit();
 		session.close();
 	}
+	
+	public void readLoginDataWithParameterSubstitution(String userId, String userName) {
+		
+		Configuration configuration = new Configuration().configure();
+		StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+		SessionFactory factory = configuration.buildSessionFactory(builder.build());
+		
+		Session session = factory.openSession();
+		session.beginTransaction();
+		
+		//Method 1
+		Query query = session.createQuery("from LOGIN where customerId > ? and username = ?");
+		query.setInteger(0, Integer.parseInt(userId));
+		query.setString(1, userName);
+		
+		List<Login> list = query.list();
+		
+		System.out.println("No of records in one page: " + list.size());
+		for(Login login : list)
+			System.out.println(login);
+		
+		//Method 2
+		query = session.createQuery("from LOGIN where customerId > :customerId and username = :username");
+		query.setInteger("customerId", Integer.parseInt(userId));
+		query.setString("username", userName);
+		
+		list = query.list();
+		
+		System.out.println("No of records in one page: " + list.size());
+		for(Login login : list)
+			System.out.println(login);
+		session.getTransaction().commit();
+		session.close();
+	}
 	/**
 	 * @param args
 	 */
@@ -108,6 +144,9 @@ public class LoginService {
 		
 		//Select some columns only
 		service.readLoginDataWithSelectedColumns();
+		
+		//Select using parameter substitution
+		service.readLoginDataWithParameterSubstitution("5", "hcl 10");
 	}
 
 }
