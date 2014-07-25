@@ -1,9 +1,9 @@
 /**
  * This class has following functionality
  * 
- * read data using Criteria API.
+ * Read data using Criteria API.
  * We need to add restrictions to filter the records.
- * 
+ * We can give AND and OR condition in where clause using Restrictions.or()/and().
  */
 package com.github.service;
 
@@ -39,6 +39,25 @@ public class LoginService {
 		session.close();
 	}
 
+	public void readLoginData() {
+		
+		Configuration configuration = new Configuration().configure();
+		StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+		SessionFactory factory = configuration.buildSessionFactory(builder.build());
+		
+		Session session = factory.openSession();
+		session.beginTransaction();
+
+		Criteria criteria = session.createCriteria(Login.class);
+		criteria.add(Restrictions.or(Restrictions.like("username", "hcl"), Restrictions.gt("customerId", 25)));
+		
+		List<Login> list = criteria.list();
+		for(Login login : list)
+			System.out.println(login);
+		session.getTransaction().commit();
+		session.close();
+	}
+
 	/**
 	 * @param args
 	 */
@@ -46,7 +65,7 @@ public class LoginService {
 
 		LoginService service = new LoginService();
 		service.readLoginDataById(25);
-		
+		service.readLoginData();
 	}
 
 }
